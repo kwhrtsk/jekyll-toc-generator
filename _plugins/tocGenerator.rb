@@ -6,7 +6,7 @@ module Jekyll
     TOC_CONTAINER_HTML = '<div id="toc-container"><table class="toc" id="toc"><tbody><tr><td>%1<ul>%2</ul></td></tr></tbody></table></div>'
     HIDE_HTML = '<span class="toctoggle">[<a id="toctogglelink" class="internal" href="#">%1</a>]</span>'
 
-   def toc_generate(html)
+   def toc_generate(html, page_url='')
         # No Toc can be specified on every single page
         # For example the index page has no table of contents
         no_toc = @context.environments.first["page"]["noToc"] || false;
@@ -54,7 +54,8 @@ module Jekyll
                     toc_section + inner_section,
                     item_number.to_s + '.' + inner_section.to_s,
                     h3.text,
-                    '')
+                    '',
+                    page_url)
             end
             if level_html.length > 0
                 level_html = '<ul>' + level_html + '</ul>';
@@ -67,7 +68,9 @@ module Jekyll
                 toc_section,
                 item_number,
                 h2.text,
-                level_html);
+                level_html,
+                page_url
+                );
 
             toc_section += 1 + inner_section;
             item_number += 1;
@@ -100,8 +103,9 @@ module Jekyll
 
 private
 
-    def create_level_html(anchor_id, toc_level, toc_section, tocNumber, tocText, tocInner)
-        link = '<a href="#%1"><span class="tocnumber">%2</span> <span class="toctext">%3</span></a>%4'
+    def create_level_html(anchor_id, toc_level, toc_section, tocNumber, tocText, tocInner, page_url)
+        link = '<a href="%0#%1"><span class="tocnumber">%2</span> <span class="toctext">%3</span></a>%4'
+            .gsub('%0', page_url.to_s)
             .gsub('%1', anchor_id.to_s)
             .gsub('%2', tocNumber.to_s)
             .gsub('%3', tocText)
