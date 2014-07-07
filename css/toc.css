@@ -1,40 +1,24 @@
+div#toctitle > h3 {
+  margin:0;
+  font-weight: 300;
+}
 
-#toc, .toc, .mw-warning {
-    background-color: #F9F9F9;
-    border: 1px solid #AAAAAA;
-    font-size: 95%;
-    padding: 5px;
-}
-#toc h2, .toc h2 {
-    border: medium none;
-    display: inline;
-    font-size: 100%;
-    font-weight: bold;
-    padding: 0;
-}
-#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
-    text-align: center;
-}
 #toc ul, .toc ul {
-    list-style-image: none;
-    list-style-type: none;
-    margin-left: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    text-align: left;
-}
-#toc ul ul, .toc ul ul {
-    margin: 0 0 0 2em;
-}
-#toc .toctoggle, .toc .toctoggle {
-    font-size: 94%;
+  list-style-image: none;
+  list-style-type: none;
 }
 
-#toc ul li {
-    list-style-type: none;
-    padding-left: 0;
+div#toc-container {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  margin: 30px 0;
 }
 
-#toc-container {
-	margin-bottom: 10px;
+div#toctitle {
+  padding: 15px;
+}
+
+div#toc ul li {
+  list-style-type: none;
+  padding: 3px 10px;
 }
