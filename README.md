@@ -1,7 +1,7 @@
 jekyll-toc-generator
 ====================
 
-Liquid filter to generate Table of Content into Jeklyll pages 
+Liquid filter to generate Table of Content into Jeklyll pages
 
 This filter adds to jekyll pages a Table of Content (TOC), it generates the necessary HTML code.
 
@@ -51,7 +51,7 @@ The style is compatible with mediawiki themes
 
 # Disable generation per page
 
-It is possible to suppress the TOC generation in specific pages, for example the index page normally hasn't a TOC.  
+It is possible to suppress the TOC generation in specific pages, for example the index page normally hasn't a TOC.
 This can be done into the [Front Matter](http://jekyllrb.com/docs/frontmatter/) section used by jekyll
 
 
@@ -135,7 +135,7 @@ For example the markdown code shown below
     heading 1
     =========
 
-    blah blah 
+    blah blah
 
     heading 1.1
     -----------
@@ -149,3 +149,53 @@ Generates the following HTML code
 # Github pages can't use plugins
 
 If you host your jekyll pages on github you can't run plugins, in this scenario you can use a full javascript solution using [TOC Generator for Markdown](https://github.com/dafi/tocmd-generator)
+
+# Add
+
+[Codeblock](http://octopress.org/docs/plugins/codeblock/) is  can write blocks of code directly in your posts and optionally add titles and links.
+
+`Codeblock` is uses a special indentation.
+
+> sample source
+
+```html
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>osascript -e <span class="s1">'tell application "iTerm" to activate'</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+```
+But, it is different when using a [nokogiri](http://nokogiri.org/) of `.to_xhtml`.
+
+> sample source
+
+```html
+<figure class="code">
+   <div class="highlight">
+      <table>
+         <tbody><tr>
+            <td class="gutter">
+               <pre class="line-numbers"><span class="line-number">1</span>
+</pre>
+            </td>
+            <td class="code">
+               <pre>                  <code class="bash">
+                     <span class="line"><span class="nv">$ </span>osascript -e <span class="s1">'tell application "iTerm" to activate'</span>
+</span>
+                  </code>
+               </pre>
+            </td>
+         </tr>
+      </tbody></table>
+   </div>
+</figure>
+```
+
+So, I've rewritten the code.
+
+> jekyll-toc-generator/_plugins/tocGenerator.rb
+
+```
+- doc.css('body').children.to_xhtml(indent:3, indent_text:" ")
+
++ doc.css('body').children.to_html
+```
+

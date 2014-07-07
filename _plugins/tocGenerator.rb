@@ -92,14 +92,14 @@ module Jekyll
                     .gsub('%2', toc_html);
                 doc.css('body').children.before(toc_table)
             end
-            doc.css('body').children.to_xhtml(indent:3, indent_text:" ")
+            doc.css('body').children.to_html
         else
             return html
         end
    end
 
 private
-  
+
     def create_level_html(anchor_id, toc_level, toc_section, tocNumber, tocText, tocInner)
         link = '<a href="#%1"><span class="tocnumber">%2</span> <span class="toctext">%3</span></a>%4'
             .gsub('%1', anchor_id.to_s)
